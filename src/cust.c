@@ -15,6 +15,7 @@ int custMenu()
 	scanf("%d",&ch);
 	return ch;
 }
+
 CUST * signUpCust(CUST *head)
 {
 	CUST *newNode = NULL;
@@ -172,7 +173,7 @@ CUST* loadCustDetails()
 				newNode->next = NULL;
 				head = newNode;
 				cust = newNode;
-				tokenizeCUST(newNode, tmpBuff);
+				//tokenizeCUST(newNode, tmpBuff);
 						
 			}
 			else /* rest of the records */
@@ -194,7 +195,7 @@ CUST* loadCustDetails()
 	return head;
 }
 
-
+/*
 int tokenizeCUST(CUST *cust, char *tmpBuff)
 {
 	char *tokens;
@@ -214,3 +215,4 @@ int tokenizeCUST(CUST *cust, char *tmpBuff)
 
 	//dispPD(pd);
 }
+*/

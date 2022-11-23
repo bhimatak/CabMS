@@ -13,6 +13,7 @@ typedef struct customer
 
 }CUST;
 
+int custMenu();
 
 CUST* signUpCust(CUST *);
 
@@ -21,6 +22,6 @@ int findLRecCust(CUST *, char *, char *);
 void dispCust(CUST *);
 
 int writeCustDetails(CUST*);
-int loadCustDetails(CUST*);
+CUST* loadCustDetails();
 
 #endif

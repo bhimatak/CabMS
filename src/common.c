@@ -4,6 +4,7 @@
 int mainMenu()
 {
 	int ch;
+	printf("\n\t==================Main Menu========================\n");
 	printf("\n\tEnter,");
 	printf("\n\t1. Customer");
 	printf("\n\t2. Cab Driver");

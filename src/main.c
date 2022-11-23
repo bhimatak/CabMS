@@ -1,58 +1,84 @@
 #include <common.h>
 #include <cust.h>
 #include <driver.h>
+#include <trip.h>
 
 int main()
 {
-	int ch = 0;
-	int retVal = 0;
+	int ch = 0, bid=0;
+	int retVal = 0, flag=0;
+
 	CUST *hCust = NULL;
 	DRIVER *hDriver = NULL;
-
+	TRIP *hTrip = NULL;
 	while(1){
 		ch = mainMenu();
 		switch(ch)
 		{
 			case 1:
-				ch = custMainMenu();
-				switch(ch)
+				while(1)
 				{
-					case 1:
-						hCust = signUpCust(hCust);
-
-						break;
-					case 2:
-						retVal = signInCust(hCust);
-						if(retVal == 1)
+						ch = custMainMenu();
+						switch(ch)
 						{
-							ch = custMenu();
-							switch(ch)
-							{
-								case 1:
-									bookTrip();
-									break;
-								case 2:
-									checkDrv();
-									break;
-								case 3:
-									checkCab();
-									break;
-								case 4:
-									printBook();
-								case 5:
-									printf("\n\tReturn to Main Menu");
-									break;
-								default:
-									printf("\nWrong Choice\n");
+							case 1:
+								hCust = signUpCust(hCust);
 
-							}
+								break;
+							case 2:
+								retVal = signInCust(hCust);
+								if(retVal == 1)
+								{
+									while(1){
+										ch = custMenu();
+										switch(ch)
+										{
+											case 1:
+												hTrip = bookTrip(hTrip,&bid);
+												printf("\n\tYour Booking is confirmed with following details\n");
+												printBook(hTrip, hCust,hDriver, bid);
+												break;
+											case 2:
+												//checkDrv();
+												break;
+											case 3:
+												//checkCab();
+												break;
+											case 4:
+												printf("\n\tEnter the Booking ID: ");
+												scanf("%d",&bid);
+												printBook(hTrip, hCust,hDriver, bid);
+												break;
+											case 5:
+												flag = 1; 
+												/*printf("\n\tReturn to Main Menu");*/
+												break;
+											default:
+												printf("\nWrong Choice\n");
+
+										}
+										if(flag == 1)
+										{
+											flag = 0;
+											break;
+										}
+									}
+								}
+								break;
+							case 3:
+								//dispCust(hCust);
+								/*printf("\n\tReturning Back to MainMenu");*/
+								writeCustDetails(hCust);
+								flag = 1;
+								break;
+							default:
+								printf("\n\tSomething went wrong");
 						}
-					case 3:
-						//dispCust(hCust);
-						printf("\n\tReturning Back to MainMenu");
+					if(flag == 1)
+					{
+						flag = 0;
 						break;
-					default:
-						printf("\n\tSomething went wrong");
+					}
 				}
 				break;
 			case 2:
