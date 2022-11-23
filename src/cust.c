@@ -1,6 +1,20 @@
 #include <common.h>
 #include <cust.h>
 
+int custMenu()
+{
+	int ch = 0;
+	printf("\n\t===============Customer Trip Menu==========\n");
+	printf("\n\tPress,");
+	printf("\n\t1. Book Trip");
+	printf("\n\t2. Check Driver Details");
+	printf("\n\t3. Check Cab Details");
+	printf("\n\t4. Print Booking Details");
+	printf("\n\t5. Return Back to Main Menu");
+	printf("\n\tChoice: ");
+	scanf("%d",&ch);
+	return ch;
+}
 CUST * signUpCust(CUST *head)
 {
 	CUST *newNode = NULL;
@@ -93,4 +107,110 @@ void dispCust(CUST *head)
 		printf("\n\t%d",head->_id);
 		head = head->next;
 	}
+}
+
+int writeCustDetails(CUST* head)
+{
+	FILE *fp = NULL;
+
+	fp = fopen("CUST.dat","w+");
+	if(fp == NULL)
+	{
+		perror("\n\tfopen() ");
+		return -1;
+	}
+
+	
+	if(head == NULL){
+		printf("\n\t No Records Present\n");
+		return 0;
+	}
+	while(head != NULL){
+		fprintf(fp,"%d, %d, %s, %c, %s, %s\n",head->_id,head->phone,head->name, head->gender, head->cName, head->cPasswd);
+		head = head->next;
+	}
+
+	fclose(fp);
+
+}
+
+
+CUST* loadCustDetails()
+{
+	FILE *fp = NULL;
+	CUST *newNode = NULL;
+	CUST *head = NULL;
+	CUST *cust; 
+	int _fSize = 0;
+	char tmpBuff[256] = {'\0', };
+	
+	fp = fopen("CUST.dat","r");
+	if(fp == NULL)
+	{
+		perror("\n\tfopen() ");
+		return NULL;
+	}
+
+	fseek(fp, 0L, SEEK_SET);
+	fseek(fp, 0L, SEEK_END);
+	_fSize = ftell(fp);
+	
+	if(_fSize == 0) /* No records */
+	{
+		head = NULL;
+	}
+	else
+	{
+		fseek(fp, 0L, SEEK_SET);
+		memset(tmpBuff,'\0', 256);
+		
+		while(fgets(tmpBuff, 256, fp)){
+			
+			if(head == NULL) /* first record */
+			{
+				newNode = (CUST *)malloc(sizeof(CUST));
+				newNode->next = NULL;
+				head = newNode;
+				cust = newNode;
+				tokenizeCUST(newNode, tmpBuff);
+						
+			}
+			else /* rest of the records */
+			{
+				newNode = (CUST *)malloc(sizeof(CUST));
+				newNode->next = NULL;
+				cust->next = newNode;
+				//tokenizeCUST(newNode, tmpBuff);
+				cust = cust->next;	
+			}
+			
+
+		}
+
+	}
+
+	fclose(fp);
+	// printf("\n\tHead : %u\nlast node: %u\n", head, pd);
+	return head;
+}
+
+
+int tokenizeCUST(CUST *cust, char *tmpBuff)
+{
+	char *tokens;
+	int i, count;
+	char *tmpBuff1;
+
+	tokens = strtok(tmpBuff, ",");
+	pd->_id = atoi(tokens);
+
+	tokens = strtok(NULL, ",");
+	removeLeading(tokens,pd->_name);
+	
+	tokens = strtok(NULL, ",");
+	removeLeading(tokens,tokens);
+	removeTrailing(tokens);
+	pd->_gender = tokens[0];
+
+	//dispPD(pd);
 }

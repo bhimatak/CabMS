@@ -2,18 +2,10 @@
 #include <cust.h>
 #include <driver.h>
 
-
-
-
-typedef struct tripDetails
-{
-
-}TRIP;
-
-
 int main()
 {
 	int ch = 0;
+	int retVal = 0;
 	CUST *hCust = NULL;
 	DRIVER *hDriver = NULL;
 
@@ -22,7 +14,7 @@ int main()
 		switch(ch)
 		{
 			case 1:
-				ch = custMenu();
+				ch = custMainMenu();
 				switch(ch)
 				{
 					case 1:
@@ -30,7 +22,31 @@ int main()
 
 						break;
 					case 2:
-						signInCust(hCust);
+						retVal = signInCust(hCust);
+						if(retVal == 1)
+						{
+							ch = custMenu();
+							switch(ch)
+							{
+								case 1:
+									bookTrip();
+									break;
+								case 2:
+									checkDrv();
+									break;
+								case 3:
+									checkCab();
+									break;
+								case 4:
+									printBook();
+								case 5:
+									printf("\n\tReturn to Main Menu");
+									break;
+								default:
+									printf("\nWrong Choice\n");
+
+							}
+						}
 					case 3:
 						//dispCust(hCust);
 						printf("\n\tReturning Back to MainMenu");

@@ -6,7 +6,7 @@
 #include <string.h>
 
 int mainMenu();
-int custMenu();
+int custMainMenu();
 int driverMenu();
 
 #endif

@@ -13,7 +13,7 @@ int mainMenu()
 	return ch;
 }
 
-int custMenu()
+int custMainMenu()
 {
 	int ch;
 	printf("\n\t==================Customer's Menu========================\n");

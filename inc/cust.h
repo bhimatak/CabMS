@@ -20,4 +20,7 @@ int signInCust(CUST *);
 int findLRecCust(CUST *, char *, char *);
 void dispCust(CUST *);
 
+int writeCustDetails(CUST*);
+int loadCustDetails(CUST*);
+
 #endif
