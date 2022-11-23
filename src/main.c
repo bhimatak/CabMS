@@ -109,6 +109,8 @@ int main()
 		}	
 	}
 	
+	if(hCust != NULL)
+		free(hCust);
 	printf("\n\n");
 
 	return 0;
