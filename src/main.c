@@ -1,18 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <common.h>
+#include <cust.h>
 
-typedef struct customer
-{
-	int _id;
-	int phone;
-	char name[20];
-	char gender;
-	char cName[20];
-	char cPasswd[20];
-	struct customer *next;
 
-}CUST;
 
 typedef struct driver
 {
@@ -63,28 +52,7 @@ int custMenu()
 	return ch;	
 }
 
-int signUpCust()
-{
-	printf("\n\tEnter Customer Details,");
-	printf("\n\tName: ");
-	printf("\n\tID: ");
-	printf("\n\tGender: ");
-	printf("\n\tPhone Number: ");
-	printf("\n\tUser Name: ");
-	printf("\n\tPassword: ");
-}
 
-int signInCust()
-{
-	printf("\n\t===============Customer Login=================\n");
-	printf("\n\tEnter,");
-	printf("\n\tUser Name: ");
-	printf("\n\tPassword: ");
-	/*
-
-	logic to find user name exists
-	 */
-}
 
 int driverMenu()
 {
@@ -142,10 +110,41 @@ int main()
 		switch(ch)
 		{
 			case 1:
-				custMenu();
+				ch = custMenu();
+				switch(ch)
+				{
+					case 1:
+						hCust = signUpCust(hCust);
+
+						break;
+					case 2:
+						signInCust(hCust);
+					case 3:
+						//dispCust(hCust);
+						printf("\n\tReturning Back to MainMenu");
+						break;
+					default:
+						printf("\n\tSomething went wrong");
+				}
 				break;
 			case 2:
-				driverMenu();
+				ch = driverMenu();
+				switch(ch)
+				{
+					case 1:
+						hCust = signUpDriver(hCust);
+
+						break;
+					case 2:
+						signInDriver(hCust);
+					case 3:
+						//dispCust(hCust);
+						printf("\n\tReturning Back to MainMenu");
+						break;
+					default:
+						printf("\n\tSomething went wrong");
+				}
+				break;
 				break;
 			case 3:
 				printf("\n\tThank You\n\n");
